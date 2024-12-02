@@ -53,7 +53,7 @@ git push -u origin main
 ### 5. Configure Deployment Settings
 1. **Environment**: Choose your app environment (e.g., Python, Node.js, etc.).
 2. **Build Command**: Specify the command to build your app (e.g., `pip install -r requirements.txt` for Python).
-3. **Start Command**: Add the command to run your app (e.g., `python app.py` for a Dash app).
+3. **Start Command**: Add the command to run your app (e.g., `gunicorn app:server` for a Dash app).
 4. **Bind the Port**: Ensure your app listens to the port provided by Render's `PORT` environment variable equal to `10000`. For Dash apps, modify the following code in your app's script to bind the correct port:
 
    ```python
