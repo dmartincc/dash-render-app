@@ -1,3 +1,7 @@
+Here’s the updated README with instructions for port binding added in step 5:
+
+---
+
 # Deploying a Web App on Render
 
 This guide will walk you through deploying a web application on [Render](https://render.com).
@@ -8,7 +12,6 @@ This guide will walk you through deploying a web application on [Render](https:/
 1. Log in to your GitHub account.
 2. Create a new repository by clicking the **New** button.
 3. Name your repository (e.g., `dash-render-app`) and initialize it with a README if desired.
-
 
 ### 2. Push Your Code to the Repository
 Follow these steps to push your local project to the GitHub repository:
@@ -35,7 +38,6 @@ git remote add origin git@github.com:user/repo-name.git
 # Push the changes to the remote repository
 git push -u origin main
 ```
-
 ### 3. Connect the GitHub Repository to Render
 1. Log in to your Render account at [https://render.com](https://render.com).
 2. Navigate to the **Dashboard** and click **New +**.
@@ -51,16 +53,23 @@ git push -u origin main
 ### 5. Configure Deployment Settings
 1. **Environment**: Choose your app environment (e.g., Python, Node.js, etc.).
 2. **Build Command**: Specify the command to build your app (e.g., `pip install -r requirements.txt` for Python).
-3. **Start Command**: Add the command to run your app (e.g., `gunicorn app:server` for a Flask/Dash app).
-4. Review and save your configuration.
+3. **Start Command**: Add the command to run your app (e.g., `python app.py` for a Dash app).
+4. **Bind the Port**: Ensure your app listens to the port provided by Render's `PORT` environment variable. For Dash apps, modify the following code in your app's script to bind the correct port:
 
+   ```python
+   import os
+   if __name__ == '__main__':
+       app.run_server(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
+   ```
 
-Your web app will now deploy automatically. Render will build, deploy, and make it available at a public URL.
+5. Review and save your configuration.
 
+### Your Web App Is Ready!
+Render will automatically:
+- Build the application.
+- Deploy it to a public URL.
 ### Notes
-- Ensure that your repository includes all required dependencies and a `requirements.txt` or equivalent file.
-- You can monitor logs and redeploy from the Render dashboard.
-- Use numpy==2.1.0 if required for python 3.10.
-
-For more information, visit the [Render Documentation](https://render.com/docs).
-
+- Ensure your repository includes all required dependencies in a `requirements.txt` file.
+- Monitor logs and redeploy from the Render dashboard if necessary.
+- Use `numpy==1.23.5` if required for compatibility with Python 3.10.
+- Check Render's [documentation](https://render.com/docs) for additional customization options.
