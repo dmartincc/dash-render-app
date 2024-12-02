@@ -51,7 +51,7 @@ git push -u origin main
 ### 5. Configure Deployment Settings
 1. **Environment**: Choose your app environment (e.g., Python, Node.js, etc.).
 2. **Build Command**: Specify the command to build your app (e.g., `pip install -r requirements.txt` for Python).
-3. **Start Command**: Add the command to run your app (e.g., `python app.py` for a Flask/Dash app).
+3. **Start Command**: Add the command to run your app (e.g., `gunicorn app:server` for a Flask/Dash app).
 4. Review and save your configuration.
 
 

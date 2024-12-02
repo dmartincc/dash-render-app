@@ -1,18 +1,14 @@
-'''
- # @ Create Time: 2024-11-04 10:47:15.796041
-'''
-
 from dash import Dash, html, dcc
 import plotly.express as px
 import pandas as pd
+import os
 
 app = Dash(__name__, title="app-deploy")
 
-# Declare server for Heroku deployment. Needed for Procfile.
+# Declare server for Render deployment
 server = app.server
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
+# Create a sample DataFrame
 df = pd.DataFrame({
     "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
     "Amount": [4, 1, 2, 2, 4, 5],
@@ -21,6 +17,7 @@ df = pd.DataFrame({
 
 fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
+# Define the app layout
 app.layout = html.Div(children=[
     html.H1(children='Hello Dash'),
 
@@ -35,4 +32,4 @@ app.layout = html.Div(children=[
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8050)))
